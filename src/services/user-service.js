@@ -103,6 +103,15 @@ class UserService{
         }
     }
 
+    isAdmin(userId){
+        try {
+            return this.userRepository.isAdmin(userId);
+        } catch (error) {
+            console.log(`Something went in password Checking`);
+            throw error;
+        }
+    }
+
 }
 
 module.exports = UserService;
