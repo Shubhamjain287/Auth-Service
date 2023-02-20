@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const { JWT_KEY } = require("../config/serverConfig");
 const bcrypt = require("bcrypt");
 const { response } = require("express");
+const AppError = require("../utils/error-handler");
 
 class UserService{
 
@@ -16,6 +17,10 @@ class UserService{
             return user;
         } catch (error) {
             console.log(`Something went wrong on Service Layer`);
+            if(error.name == "SequelizeValidationError"){
+                throw error;
+            }
+            // throw new AppError('ServerError','Something Went Wrong In Service Layer', 'Logical Issue Found',500);
             throw error;
         }
     }
