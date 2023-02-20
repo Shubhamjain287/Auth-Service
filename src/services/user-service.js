@@ -40,6 +40,11 @@ class UserService{
 
         } catch (error) {
             console.log(`Something went wrong in the sign in Process`);
+
+            if(error.name == "AttributeNotFound"){
+                throw error;
+            }
+
             throw error;
         }
     }
